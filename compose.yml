@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    container_name: aws-lab-app
+    platform: linux/amd64 # Ensure compatibility with Mx Macs
+    ports:
+      - "8080:8080"
+  localstack:
+    image: localstack/localstack:latest
+    container_name: aws-lab
+    platform: linux/amd64 # Ensure compatibility with Mx Macs
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"  # LocalStack services
+    environment:
+      - SERVICES=secretsmanager,dynamodb
+      - PERSISTENCE=1          # Enables persistence for data
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=1
