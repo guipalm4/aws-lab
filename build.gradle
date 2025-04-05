@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.guipalm4'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // AWS SDK v2 para Secret Manager e DynamoDB
+    implementation "software.amazon.awssdk:secretsmanager:2.20.0"
+    implementation "software.amazon.awssdk:dynamodb:2.20.0"
+
+    // Dependência para testes com JUnit
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+}
+
+test {
+    useJUnitPlatform()
+}
+application {
+    mainClassName = 'com.guipalm4.App'
+}
