@@ -1,4 +1,6 @@
 plugins {
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'java'
     id 'application'
 }
@@ -13,17 +15,24 @@ repositories {
 }
 
 dependencies {
-    // AWS SDK v2 para Secret Manager e DynamoDB
-    implementation "software.amazon.awssdk:secretsmanager:2.20.0"
-    implementation "software.amazon.awssdk:dynamodb:2.20.0"
+    // Importa o BOM da AWS SDK para fixar a versão
+    implementation platform("software.amazon.awssdk:bom:2.31.15")
 
-    // Dependência para testes com JUnit
-    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // Dependências do Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // AWS SDK v2 para Secret Manager e DynamoDB
+    implementation "software.amazon.awssdk:secretsmanager"
+    implementation "software.amazon.awssdk:dynamodb"
+
+    // Dependências para testes
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
     useJUnitPlatform()
 }
 application {
-    mainClassName = 'com.guipalm4.App'
+    mainClassName = 'com.guipalm4.awslab.App'
 }
